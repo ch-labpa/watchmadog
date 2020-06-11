@@ -1,68 +1,47 @@
 <?php
     include("includes/conn.php");
     session_start();
-    if(isset($_SESSION['login_user'])) header("location: ./");
+    if(isset($_SESSION['user'])) header("location: ./");
     mysqli_query($db, "SET FOREIGN_KEY_CHECKS=0");
-    $doggy_id = '';
-    $human_id = '';
-    if($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (!empty($_POST['doggyName']) && !empty($_POST['cumple']) && !empty($_POST['nombresuscriptor']) && !empty(['email']) && !empty(['celular']) && !empty(['password'])){
-            // dog data
-            $doggy = mysqli_real_escape_string($db, $_POST['doggyName']);
-            $plan = mysqli_real_escape_string($db, $_POST['plan']);
-            $cumple = date("Y-m-d");
-            $gender = mysqli_real_escape_string($db, $_POST['gender']);
-            $size = mysqli_real_escape_string($db, $_POST['doggySize']);
+    $user_id = '';
+    $_id = '';
+    if (!empty($_POST['name']) && !empty($_POST['surname']) && !empty($_POST['email']) && !empty(['passwors'])){
+        // user data
+        $name = mysqli_real_escape_string($db, $_POST['name']);
+        $surname = mysqli_real_escape_string($db, $_POST['surname']);
+        $region = mysqli_real_escape_string($db, $_POST['region']);
+        $birthyear = mysqli_real_escape_string($db, $_POST['birthyear']);
+        $phone = mysqli_real_escape_string($db, $_POST['phone']);
+        $email = mysqli_real_escape_string($db, $_POST['email']);
+        $password = mysqli_real_escape_string($db, $_POST['password']);
+        
+        $sql="SELECT * FROM suscriptores where (email='$email')";
+        $res=mysqli_query($db,$sql);
+        if (mysqli_num_rows($res) == 0) {
+            $password = md5($password);
+            $insert_doggy_data = "INSERT INTO Users (name, surname, region, birthyear, phone, email, password, necesidades_especiales) 
+                    VALUES ('$doggy', '$plan', '$cumple', '$gender', '$size', '$dieta', '$specialDiet', '$specialNeeds')";
 
-            if (!empty($_POST['dieta'])) {
-                $dieta = mysqli_real_escape_string($db, $_POST['dieta']);
+            if (mysqli_query($db, $insert_doggy_data)) {
+                $_SESSION['user'] = $email;
+                exit(json_encode(array('status' => '1', 'fb' => 'login')));
             } else {
-                $dieta = 'No especificado';
-            }
-
-            if (!empty($_POST['specialDiet'])) {
-                $specialDiet = mysqli_real_escape_string($db, $_POST['specialDiet']);
-            } else {
-                $specialDiet = 'No especificado';
-            }
-
-            if (!empty($_POST['specialNeeds'])) {
-                $specialNeeds = mysqli_real_escape_string($db, $_POST['specialNeeds']);
-            } else {
-                $specialNeeds = 'No especificado';
-            }
-
-            // human data
-            $nombre = mysqli_real_escape_string($db, $_POST['nombresuscriptor']);
-            $email = mysqli_real_escape_string($db, $_POST['email']);
-            $celular = mysqli_real_escape_string($db, $_POST['celular']);
-            $password = mysqli_real_escape_string($db, $_POST['pass']);
-
-            // human address
-            $direccionpostal = mysqli_real_escape_string($db, $_POST['direccionpostal']);
-            $ciudad = mysqli_real_escape_string($db, $_POST['ciudad']);
-            $provincia = mysqli_real_escape_string($db, $_POST['provincia']);
-            $pais = mysqli_real_escape_string($db, $_POST['pais']);
-
-            $sql="SELECT * FROM suscriptores where (email='$email')";
-            $res=mysqli_query($db,$sql);
-            if (mysqli_num_rows($res) == 0) {
-                $password = md5($password);
-
-                $insert_doggy_data = "INSERT INTO doggies (doggy, plan, cumple, gender, size, dieta, dieta_especial, necesidades_especiales) 
-                        VALUES ('$doggy', '$plan', '$cumple', '$gender', '$size', '$dieta', '$specialDiet', '$specialNeeds')";
-                
-                if (mysqli_query($db, $insert_doggy_data)) {
-                    // redirect to user profile
-                    // login user
-                } else {
-                    exit("Hubo un problema.");
-                }
-            } else {
-                // display email is already registered error
+                exit(json_encode(array('status' => '0')));
+                // error with login (probs database)
             }
         } else {
-            echo 'form failed';
+            exit(json_encode(array('status' => '0', 'error' => 'Email is already taken.')));
         }
+
+        if (!empty($_POST['pet']) && !empty($_POST['petname'])){
+            $pet = mysqli_real_escape_string($db, $_POST['pet']);
+            $petname = mysqli_real_escape_string($db, $_POST['petname']);
+            //$pic_name = mysqli_real_escape_string($db, $_POST['']);
+            $size = mysqli_real_escape_string($db, $_POST['region']);
+            $calendar = mysqli_real_escape_string($db, $_POST['birthyear']);
+            $max_price = mysqli_real_escape_string($db, $_POST['birthyear']);
+        }
+    } else {
+        echo 'form failed';
     }
 ?>
