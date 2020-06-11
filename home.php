@@ -12,12 +12,7 @@
     <head></head>
     <main>
     <div class="jumbotron">
-            <h1>Some Favorites</h1>
-            <ul class="list-group">
-                <li class="list-group-item">Celery Root </li>
-                <li class="list-group-item">Spaghetti Squash </li>
-                <li class="list-group-item">Killer Mushrooms </li>
-            </ul>
+            <h1>WatchMaDog</h1>
         </div>
     <div class="sidebar">
 
