@@ -12,13 +12,33 @@
     <head></head>
     <main>
     <div class="jumbotron">
-            <h1>WatchMaDog</h1>
-        </div>
-    <div class="sidebar">
-
+            <h1 class="text-center">WatchMaDog</h1>
     </div>
     <div class="container">
-
+    <div class="row">
+        <div class="col-3">
+            <h3>Hi user!</h3>
+            <form action="filter.php">
+            <div class="form-group">
+                <label for="owner-sitter">What are you looking for?</label>
+                <select id="owner-sitter" class="form-control">
+                    <option>Pet</option>
+                    <option>Pet-sitter</option>
+                </select>
+                <div id="filter">
+                <script>
+                    if (document.getElementById('owner-sitter').value == "Pet") {
+                        var element = document.getElementById("new");
+                        element.appendChild(tag);
+                    }
+                </script>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col-9"> Resultsssss
+        </div>
+    </div>
     </div>
     </main>
     <footer></footer>
