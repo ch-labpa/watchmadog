@@ -20,7 +20,7 @@
         if (mysqli_num_rows($res) == 0) {
             $password = md5($password);
             $insert_doggy_data = "INSERT INTO Users (name, surname, region, birthyear, phone, email, password, necesidades_especiales) 
-                    VALUES ('$doggy', '$plan', '$cumple', '$gender', '$size', '$dieta', '$specialDiet', '$specialNeeds')";
+                    VALUES ('$name', '$surname', '$cumple', '$gender', '$size', '$dieta', '$specialDiet', '$specialNeeds')";
 
             if (mysqli_query($db, $insert_doggy_data)) {
                 $_SESSION['user'] = $email;
@@ -42,6 +42,6 @@
             $max_price = mysqli_real_escape_string($db, $_POST['birthyear']);
         }
     } else {
-        echo 'form failed';
+        exit(json_encode(array('status' => '0')));
     }
 ?>
