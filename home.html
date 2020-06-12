@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="home.js"></script>
 </head>
 <body>
     <head></head>
@@ -23,146 +24,19 @@
             <form action="filter.php">
             <div class="form-group">
                 <label for="owner-sitter"></label>
-                <select id="owner-sitter" class="form-control">
+                <select id="owner-sitter" class="form-control" onchange=getFilters()>
                     <option id="toHide" value="">What are you looking for?</option>
                     <option value="Pet">Pet</option>
                     <option value="Pet-sitter">Pet-sitter</option>
                 </select>
                 <div id="filter">
-                <script>
-                    //PET FILTERS
-                    //PET cat/dog
-                    $('<div/>', {
-                            'id':'pet-row',
-                            'class':'row'
-                        }).appendTo('#filter');
-
-                        $('<div/>', {
-                            'id':'first-pet',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#pet-row');
-                        $('<label/>', {
-                            'text': 'Dog',
-                            'for': 'dog',
-                            'style': 'padding: 0 15px 0 0 !important'
-                        }).appendTo('#first-pet');
-                        $('<input/>', {
-                            'type': 'checkbox',
-                            'name': 'pet',
-                            'value': 'dog'
-                        }).appendTo('#first-pet');
-                        $('<div/>', {
-                            'id':'second-pet',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#pet-row');
-                        $('<label/>', {
-                            'text': 'Cat',
-                            'for': 'cat',
-                            'style': 'padding: 0 15px 0 0 !important'
-                        }).appendTo('#second-pet');
-                        $('<input/>', {
-                            'type': 'checkbox',
-                            'name': 'pet',
-                            'value': 'cat'
-                        }).appendTo('#second-pet');
-                        //SIZE
-                        $('<div/>', {
-                            'id':'size-row',
-                            'class':'row'
-                        }).appendTo('#filter');
-
-                        $('<div/>', {
-                            'id':'first',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#size-row');
-                        $('<label/>', {
-                            'text': 'big',
-                            'for': 'big',
-                            'style': 'padding: 0 15px 0 0 !important'
-                        }).appendTo('#first');
-                        $('<input/>', {
-                            'type': 'checkbox',
-                            'name': 'size',
-                            'value': 'big'
-                        }).appendTo('#first');
-                        
-                        $('<div/>', {
-                            'id':'second',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#size-row');
-                        $('<div/>', {
-                            'id':'second',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#filter');
-                        $('<label/>', {
-                            'text': 'medium',
-                           'for': 'medium',
-                            'style': 'padding: 0 15px 0 0 !important'
-                        }).appendTo('#second');
-                        $('<input/>', {
-                            'type': 'checkbox',
-                            'name': 'size',
-                            'value': 'medium'
-                        }).appendTo('#second');
-
-                        $('<div/>', {
-                            'id':'third',
-                            'class':'form-check form-check-group'
-                        }).appendTo('#size-row');
-                        $('<label/>', {
-                            'text': 'small',
-                            'for': 'small',
-                            'style': 'padding: 0 15px 0 0 !important'
-                        }).appendTo('#third');
-                        $('<input/>', {
-                            'type': 'checkbox',
-                            'name': 'size',
-                            'value': 'small'
-                        }).appendTo('#third');
-                        $('#pet-row').hide();
-                        $('#size-row').hide();
-                        // PET SITTER FILTERS - max price, calendar
-                        $('<label/>', {
-                            'id': 'priceSlide-label',
-                            'for':'#priceSlide',
-                            'text': 'Max price '
-                        }).appendTo('#filter');
-                        $('<input/>', {
-                            'id':'priceSlide',
-                            'class':'no-border',
-                            'type':'range',
-                            'value':'0',
-                            'min':'0',
-                            'max':'30'
-                        }).appendTo('#filter');
-                        $('#priceSlide').hide();
-                        $('#priceSlide-label').hide();
-
-                        $("#owner-sitter").change(function (){ 
-                        
-                        
-                        if (document.getElementById('owner-sitter').value == "Pet") {
-                        //pet features: pet, size, calendar
-                        $('#toHide').hide();
-                        $('#priceSlide').hide();
-                        $('#pet-row').show();
-                        $('#size-row').show();
-                        
-                        } else {
-                            $('#toHide').hide();
-                            $('#pet-row').hide();
-                            $('#size-row').hide();
-                            $('#priceSlide').show();
-                            $('#priceSlide-label').show();
-                        }         
-                    });
-                    
-                </script>
+              
                 </div>
+                <button type="button" class="btn btn-primary" type="submit">Primary</button>
             </div>
             </form>
         </div>
-        <div class="col-9"> Resultsssss
+        <div class="col-9" id="resultId"> Resultsssss
         </div>
     </div>
     </div>
