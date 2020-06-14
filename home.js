@@ -105,12 +105,18 @@ $( document ).ready(function() {
                         'min':'0',
                         'max':'30'
                     }).appendTo('#filter');
+                    $('<button/>', {
+                        'id':'sub',
+                        'class':'btn btn-primary',
+                        'type':'submit',
+                        'text': 'submit'
+                    }).appendTo('#filter');
+
                     $('#priceSlide').hide();
                     $('#priceSlide-label').hide();
-
+                    $('#sub').hide();
                     $("#owner-sitter").change(function (){ 
-                    
-                    
+
                     if (document.getElementById('owner-sitter').value == "Pet") {
                     //pet features: pet, size, calendar
                     $('#toHide').hide();
@@ -118,6 +124,7 @@ $( document ).ready(function() {
                     $('#priceSlide-label').hide();
                     $('#pet-row').show();
                     $('#size-row').show();
+                    $('#sub').show();
                     
                     } else {
                         $('#toHide').hide();
@@ -125,6 +132,7 @@ $( document ).ready(function() {
                         $('#size-row').hide();
                         $('#priceSlide').show();
                         $('#priceSlide-label').show();
+                        $('#sub').show();
                     }         
                 });
 
