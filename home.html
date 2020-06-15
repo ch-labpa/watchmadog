@@ -29,26 +29,26 @@
                     <option value="Pet-sitter">Pet-sitter</option>
                 </select>
                 <div id="filter">
-                    <form id="petForm" action="petfilter.php">
+                    <form id="petForm" method="post">
                         <div id="petFilter">
                             <div id="petType" class='form-check form-check-group'>
                                 <label for="dog" style='padding: 0 15px 0 0 !important'>Dog</label>
-                                <input type="checkbox" value="dog" name="pet">
+                                <input type="checkbox" value="dog" name="pet[]">
                                 <label for="cat" style='padding: 0 15px 0 0 !important'>Cat</label>
-                                <input type="checkbox" value="cat" name="pet">
+                                <input type="checkbox" value="cat" name="pet[]">
                             </div>
-                            <div id="petSize" class='form-check form-check-group'>
+                            <div id="petSize[]" class='form-check form-check-group'>
                                 <label for="small" style='padding: 0 15px 0 0 !important'>Small</label>
-                                <input type="checkbox" value="small" name="size">
+                                <input type="checkbox" value="small" name="size[]">
                                 <label for="medium" style='padding: 0 15px 0 0 !important'>Medium</label>
-                                <input type="checkbox" value="medium" name="size">
+                                <input type="checkbox" value="medium" name="size[]">
                                 <label for="dobigg" style='padding: 0 15px 0 0 !important'>Big</label>
-                                <input type="checkbox" value="big" name="size">
+                                <input type="checkbox" value="big" name="size[]">
                             </div>
                             <button class="btn btn-primary" id="petSub" type="submit">Submit</button>
                         </div>
                     </form>
-                    <form id="petsitterForm" action="petsitterfilter.php">
+                    <form id="petsitterForm" method="post">
                         <div id="petsitterFilter">
                             <br>
                             <label for="#priceSlide">Max price</label>

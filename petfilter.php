@@ -1,16 +1,18 @@
 <?php
-	include("includes/conn.php");
-	session_start();
+	//include("includes/conn.php");
+	// session_start();
 
-	if(isset($_SESSION['user'])) header("location: ./");
-	mysqli_query($db, "SET FOREIGN_KEY_CHECKS=0");
-    $user_id = '';
-    $_id = '';
+	// if(isset($_SESSION['user'])) header("location: ./");
+	
+    // $user_id = '';
+    // $_id = '';
 	
 	$host = "localhost";
 	$user = "root";
 	$pwd = "";
-    $db = "WatchMaDog";
+	$db = "WatchMaDog";
+	mysqli_query($db, "SET FOREIGN_KEY_CHECKS=0");
+	//$pet = isset($_POST['pet']) ? $_POST['pet'] : array();
 
     $conn = mysqli_connect($host, $user, $pwd, $db) or die("Unable to connect to the database");
 
@@ -24,11 +26,13 @@
 		$size = $row['psize'];
 		$pic = $row['ppic'];
 	
-		$return_arr[] = array("id" => $id,
-						"pet" => $pet,
-						"name" => $name,
-						$pic = $row['ppic'],
-						"size" => $size);
+		$return_arr[] = array("id" -> $id,
+						"pet" -> $pet,
+						"name" -> $name,
+						"pic" -> $pic,
+						"size" -> $size);
 	}
-	echo json_encode($return_arr);
+	//$myArr = array("John", "Mary", "Peter", "Sally");
+	$json_arr = json_encode($return_arr);
+	echo $json_arr;
 ?>

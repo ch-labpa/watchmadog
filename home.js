@@ -21,44 +21,27 @@ $(document).ready(function() {
         e.preventDefault();
         $.ajax({
             type: "POST",
-            url: 'petfilter.php',
+            url: 'http://127.0.0.1:5500/petfilter.php',
             data: $(this).serialize(),
-            success: function(response)
+            dataType: 'json',
+            success: function(result)
             {
-                var jsonData = JSON.parse(response);
-                if (jsonData.success == "1")
-                {
-                    location.href = 'my_profile.php';
-                }
-                else
-                {
-                    alert('Invalid Credentials!');
-                }
+                alert("j");  
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                alert(errorThrown);  
+            },
+
+            //capture the request before it was sent to server
+            beforeSend: function(jqXHR, settings){
+                alert("befff");  
+            },
+
+            //this is called after the response or error functions are finished
+            //so that we can take some action
+            complete: function(jqXHR, textStatus){
+                alert("compl");  
             }
         });
     });
-
-    $('#petsitterForm').submit(function(e) {
-    e.preventDefault();
-    $.ajax({
-        type: "POST",
-        url: 'petfilter.php',
-        data: $(this).serialize(),
-        success: function(response)
-        {
-            var jsonData = JSON.parse(response);
-
-            // user is logged in successfully in the back-end
-            // let's redirect
-            if (jsonData.success == "1")
-            {
-                location.href = 'my_profile.php';
-            }
-            else
-            {
-                alert('Invalid Credentials!');
-            }
-        }
-    });
-});
 });     
