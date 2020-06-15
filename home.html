@@ -17,11 +17,10 @@
     <div class="jumbotron he">
             <h1 class="text-center">WatchMaDog</h1>
     </div>
-    <div class="container-fluid content">
+    <div class="container content">
     <div class="row">
         <div class="col-3">
             <h3>Hi user!</h3>
-            <form action="filter.php">
             <div class="form-group">
                 <label for="owner-sitter"></label>
                 <select id="owner-sitter" class="form-control">
@@ -30,10 +29,35 @@
                     <option value="Pet-sitter">Pet-sitter</option>
                 </select>
                 <div id="filter">
-                
+                    <form id="petForm" action="petfilter.php">
+                        <div id="petFilter">
+                            <div id="petType" class='form-check form-check-group'>
+                                <label for="dog" style='padding: 0 15px 0 0 !important'>Dog</label>
+                                <input type="checkbox" value="dog" name="pet">
+                                <label for="cat" style='padding: 0 15px 0 0 !important'>Cat</label>
+                                <input type="checkbox" value="cat" name="pet">
+                            </div>
+                            <div id="petSize" class='form-check form-check-group'>
+                                <label for="small" style='padding: 0 15px 0 0 !important'>Small</label>
+                                <input type="checkbox" value="small" name="size">
+                                <label for="medium" style='padding: 0 15px 0 0 !important'>Medium</label>
+                                <input type="checkbox" value="medium" name="size">
+                                <label for="dobigg" style='padding: 0 15px 0 0 !important'>Big</label>
+                                <input type="checkbox" value="big" name="size">
+                            </div>
+                            <button class="btn btn-primary" id="petSub" type="submit">Submit</button>
+                        </div>
+                    </form>
+                    <form id="petsitterForm" action="petsitterfilter.php">
+                        <div id="petsitterFilter">
+                            <br>
+                            <label for="#priceSlide">Max price</label>
+                            <input class="no-border" id="priceSlide" type="range" min="0" max="30" value="0">
+                            <button class="btn btn-primary" id="petsitterSub" type="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            </form>
         </div>
         <div class="col-9" id="resultId"> Resultsssss
         </div>
