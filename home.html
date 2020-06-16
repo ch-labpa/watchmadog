@@ -9,8 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script type="text/javascript" src="home.js"></script>
-</head>
+    </head>
 <body>
     <head></head>
     <main>
@@ -19,7 +18,7 @@
     </div>
     <div class="container content">
     <div class="row">
-        <div class="col-3">
+        <div class="col-4">
             <h3>Hi user!</h3>
             <div class="form-group">
                 <label for="owner-sitter"></label>
@@ -33,17 +32,17 @@
                         <div id="petFilter">
                             <div id="petType" class='form-check form-check-group'>
                                 <label for="dog" style='padding: 0 15px 0 0 !important'>Dog</label>
-                                <input type="checkbox" value="dog" name="pet[]">
+                                <input type="checkbox" value="dog" name="pet">
                                 <label for="cat" style='padding: 0 15px 0 0 !important'>Cat</label>
-                                <input type="checkbox" value="cat" name="pet[]">
+                                <input type="checkbox" value="cat" name="pet">
                             </div>
-                            <div id="petSize[]" class='form-check form-check-group'>
+                            <div id="petSize" class='form-check form-check-group'>
                                 <label for="small" style='padding: 0 15px 0 0 !important'>Small</label>
-                                <input type="checkbox" value="small" name="size[]">
+                                <input type="checkbox" value="small" name="size">
                                 <label for="medium" style='padding: 0 15px 0 0 !important'>Medium</label>
-                                <input type="checkbox" value="medium" name="size[]">
+                                <input type="checkbox" value="medium" name="size">
                                 <label for="dobigg" style='padding: 0 15px 0 0 !important'>Big</label>
-                                <input type="checkbox" value="big" name="size[]">
+                                <input type="checkbox" value="big" name="size">
                             </div>
                             <button class="btn btn-primary" id="petSub" type="submit">Submit</button>
                         </div>
@@ -59,11 +58,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-9" id="resultId"> Resultsssss
+        <div class="col-8" id="result"> Resultsssss
         </div>
     </div>
     </div>
     </main>
     <footer></footer>
+    <script type="text/javascript" src="home.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 $(document).ready(function() { 
 
     $('#petsitterFilter').hide();
@@ -17,30 +16,23 @@ $(document).ready(function() {
     }         
     });
 
-    $('#petForm').submit(function(e) {
+    $('#petForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
-            type: "POST",
-            url: 'http://127.0.0.1:5500/petfilter.php',
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function(result)
+            type: "post",
+            url: 'petfilter.php',
+            data: "name=" + 'name' + "&email=" + 'email' + "&message=" + 'message',
+            success: function(response)
             {
-                alert("j");  
+                alert(response);
+                var res = JSON.parse(response);
+                var $newdiv1 = $("<div></div>" );
+                var $img = $("<img src=''>");
+                var $name = $("<label>" + res[0].name + "</label>");
+                $("#result").append( $newdiv1, [$img, $name]);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert(errorThrown);  
-            },
-
-            //capture the request before it was sent to server
-            beforeSend: function(jqXHR, settings){
-                alert("befff");  
-            },
-
-            //this is called after the response or error functions are finished
-            //so that we can take some action
-            complete: function(jqXHR, textStatus){
-                alert("compl");  
             }
         });
     });
