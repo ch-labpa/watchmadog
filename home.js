@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-
+    alert("a");
     $('#petsitterFilter').hide();
     $('#petFilter').hide();
     $("#owner-sitter").change(function (){ 
