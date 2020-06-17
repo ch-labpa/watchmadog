@@ -23,15 +23,16 @@ $(document).ready(function() {
     }         
     });
 
+    info = $(this).serialize();
     $('#petForm').on('submit', function(e) {
         e.preventDefault();
         $.ajax({
             type: "post",
             url: 'petfilter.php',
-            data: "name=" + 'name' + "&email=" + 'email' + "&message=" + 'message',
+            data: info,
             success: function(response)
             {
-                alert(response);
+                alert(info);
                 var res = JSON.parse(response);
                 var $newdiv1 = $("<div></div>" );
                 var $img = $("<img src=''>");

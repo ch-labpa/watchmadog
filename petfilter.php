@@ -35,5 +35,5 @@
 	}
 	//$myArr = array("John", "Mary", "Peter", "Sally");
 	$json_arr = json_encode($return_arr);
-	echo $json_arr;
+	echo "json_arr";
 ?>
