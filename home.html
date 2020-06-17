@@ -1,70 +1,307 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>WatchMaDog</title>
+<!--
+
+Template 2101 Insertion
+
+http://www.tooplate.com/view/2101-insertion
+
+-->
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">        <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">                                            <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="css/fontawesome-all.min.css">                                      <!-- Font awesome -->
+  <link rel="stylesheet" href="css/tooplate-style.css">                                           <!-- Templatemo style -->
+
+  <script>
+    var renderPage = true;
+
+    if (navigator.userAgent.indexOf('MSIE') !== -1
+      || navigator.appVersion.indexOf('Trident/') > 0) {
+      /* Microsoft Internet Explorer detected in. */
+      alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+      renderPage = false;
+    }
+  </script>
+
+</head>
+
 <body>
-    <head></head>
-    <main>
-    <div class="jumbotron he">
-            <h1 class="text-center">WatchMaDog</h1>
+
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+  <div class="tm-main">
+
+    <div class="tm-welcome-section">
+      <div class="container tm-navbar-container">
+        <div class="row">
+          <div class="col-xl-12">
+            <nav class="navbar navbar-expand-sm">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a href="index.html" class="nav-link tm-nav-link tm-text-white active">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="login.html" class="nav-link tm-nav-link tm-text-white">SignIn</a>
+                </li>
+                <li class="nav-item">
+                  <a href="contact.html" class="nav-link tm-nav-link tm-text-white">SignUp</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="container text-center tm-welcome-container">
+        <div class="tm-welcome">
+          <img src="logo_size.jpg" alt="Logo">
+          <h1 class="text-uppercase mb-3 tm-site-name">WatchMaDog</h1>
+          <p class="tm-site-description">Whether you are willing to sitter some pets or you need someone to look after your furry babies, here you can find what you're looking for.</p>
+        </div>
+      </div>
+
     </div>
-    <div class="container content">
-    <div class="row">
-        <div class="col-4">
-            <h3>Hi user!</h3>
-            <div class="form-group">
-                <label for="owner-sitter"></label>
-                <select id="owner-sitter" class="form-control">
-                    <option id="toHide" value="">What are you looking for?</option>
-                    <option value="Pet">Pet</option>
-                    <option value="Pet-sitter">Pet-sitter</option>
-                </select>
-                <div id="filter">
-                    <form id="petForm" method="post">
-                        <div id="petFilter">
-                            <div id="petType" class='form-check form-check-group'>
-                                <label for="dog" style='padding: 0 15px 0 0 !important'>Dog</label>
-                                <input type="checkbox" value="dog" name="pet">
-                                <label for="cat" style='padding: 0 15px 0 0 !important'>Cat</label>
-                                <input type="checkbox" value="cat" name="pet">
-                            </div>
-                            <div id="petSize" class='form-check form-check-group'>
-                                <label for="small" style='padding: 0 15px 0 0 !important'>Small</label>
-                                <input type="checkbox" value="small" name="size">
-                                <label for="medium" style='padding: 0 15px 0 0 !important'>Medium</label>
-                                <input type="checkbox" value="medium" name="size">
-                                <label for="dobigg" style='padding: 0 15px 0 0 !important'>Big</label>
-                                <input type="checkbox" value="big" name="size">
-                            </div>
-                            <button class="btn btn-primary" id="petSub" type="submit">Submit</button>
-                        </div>
-                    </form>
-                    <form id="petsitterForm" method="post">
-                        <div id="petsitterFilter">
-                            <br>
-                            <label for="#priceSlide">Max price</label>
-                            <input class="no-border" id="priceSlide" type="range" min="0" max="30" value="0">
-                            <button class="btn btn-primary" id="petsitterSub" type="submit">Submit</button>
-                        </div>
-                    </form>
+
+    <div class="container">
+      <div class="tm-search-form-container">
+        <form action="index.html" method="GET" class="form-inline tm-search-form">
+          <div class="text tm-new-release">Insert Location</div>
+          <div class="form-group tm-search-box">
+            <input type="text" name="keyword" class="form-control tm-search-input" placeholder="Type your location ...">
+            <input type="submit" value="Search" class="form-control tm-search-submit">
+          </div>
+        </form>
+        <div class="container content">
+          <div class="row">
+              <div class="col-4">
+                  <div class="form-group">
+                      <label for="owner-sitter"></label>
+                      <select id="owner-sitter" class="form-control">
+                          <option id="toHide" value="">What are you looking for?</option>
+                          <option value="Pet">Pet</option>
+                          <option value="Pet-sitter">Pet-sitter</option>
+                      </select>
+                      <div id="filter">
+                          <form id="petForm" method="post">
+                              <div id="petFilter">
+                                  <div id="petType" class='form-check form-check-group'>
+                                      <label for="dog" style='padding: 0 15px 0 0 !important'>Dog</label>
+                                      <input type="checkbox" value="dog" name="pet">
+                                      <label for="cat" style='padding: 0 15px 0 0 !important'>Cat</label>
+                                      <input type="checkbox" value="cat" name="pet">
+                                  </div>
+                                  <div id="petSize" class='form-check form-check-group'>
+                                      <label for="small" style='padding: 0 15px 0 0 !important'>Small</label>
+                                      <input type="checkbox" value="small" name="size">
+                                      <label for="medium" style='padding: 0 15px 0 0 !important'>Medium</label>
+                                      <input type="checkbox" value="medium" name="size">
+                                      <label for="dobigg" style='padding: 0 15px 0 0 !important'>Big</label>
+                                      <input type="checkbox" value="big" name="size">
+                                  </div>
+                                  <button class="btn btn-primary" id="petSub" type="submit">Submit</button>
+                              </div>
+                          </form>
+                          <form id="petsitterForm" method="post">
+                              <div id="petsitterFilter">
+                                  <br>
+                                  <label for="#priceSlide">Max price</label>
+                                  <input class="no-border" id="priceSlide" type="range" min="0" max="30" value="0">
+                                  <button class="btn btn-primary" id="petsitterSub" type="submit">Submit</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+      </div>
+
+      <div class="row tm-albums-container grid">
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/orange-tabby-cat-with-red-handkerchief-sitting-on-white-1741205.jpg" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Chucky</h2>
+              <p>Rollover text and description text goes here over mouse over...</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/adorable-animal-cat-close-up-320014.jpg" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Toby</h2>
+              <p>Maecenas iaculis et turpis et iaculis. Aenean at volutpat diam.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/bird-pet-animals-birds-56733.jpg" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Papp</h2>
+              <p>Vivamus eget elit purus. Nullam consectetur porttitor elementum.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-sm-6 col-12 col-md-6 col-lg-3 col-xl-3 tm-album-col">
+          <figure class="effect-sadie">
+            <img src="img/brown-and-white-short-coated-puppy-1805164.jpg" alt="Image" class="img-fluid">
+            <figcaption>
+              <h2>Hachiko</h2>
+              <p>Praesent nec feugiat dolor, elementum mollis purus. Etiam faucibus.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-xl-12">
+          <div class="media-boxes">
+            <div class="media">
+              <img src="img/person-in-brown-cable-knife-sweater-holding-white-and-black-129634.jpg" alt="Image" class="mr-3" style="width:auto;height:140px;">
+              <div class="media-body tm-bg-gray">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-blue">Vivamus eget urna vitae ante</h5>
+                  <p class="mb-0">Insertion HTML Template includes 3 different pages. You can use this layout for your website. Please tell your friends about <a href="https://plus.google.com/+tooplate" target="_parent">Tooplate</a>. Thank you.</p>
                 </div>
+                <div class="tm-buy-box">
+                  <a href="#" class="tm-bg-blue tm-text-white tm-buy">hourly rate</a>
+                  <span class="tm-text-blue tm-price-tag">$5.50</span>
+                </div>
+              </div>
             </div>
+
+            <div class="media">
+              <img src="img/adult-tan-and-white-french-bulldog-545063.jpg" alt="Image" class="mr-3" style="width:auto;height:140px;">
+              <div class="media-body tm-bg-pink-light">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-pink">Proin fermentum sapien sed nisl</h5>
+                  <p class="mb-0">Donec est felis, posuere viverra dapibus ac, pretium vel libero. Aliquam consectetur, arcu eget euismod congue, tortor metus vehicula.</p>
+                </div>
+                <div class="tm-buy-box">
+                  <a href="#" class="tm-bg-pink tm-text-white tm-buy">hourly rate</a>
+                  <span class="tm-text-pink tm-price-tag">$7.25</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="media">
+              <img src="img/calico-cat-on-focus-photo-1404819.jpg" alt="Image" class="mr-3" style="width:auto;height:140px;">
+              <div class="media-body tm-bg-gray">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-blue">Quisque dignissim porta nunc</h5>
+                  <p class="mb-0">In neque felis, fringilla vel orci ut, sodales consectetur purus. Vivamus eget urna vitae ante pellentesque iaculis. Praesent sit amet.</p>
+                </div>
+                <div class="tm-buy-box">
+                  <a href="#" class="tm-bg-blue tm-text-white tm-buy">hourly rate</a>
+                  <span class="tm-text-blue tm-price-tag">$6.80</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="media">
+              <img src="img/closeup-photography-of-adult-short-coated-tan-and-white-dog-731022.jpg" alt="Image" class="mr-3" style="width:auto;height:140px;">
+              <div class="media-body tm-bg-pink-light">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-pink">Vestibulum mattis quam sodales</h5>
+                  <p class="mb-0">Curabitur id tempor orci. Fusce efficitur in enim sit amet sodales. Proin id gravida leo. Phasellus non quam et justo faucibus rhoncus.</p>
+                </div>
+                <div class="tm-buy-box">
+                  <a href="#" class="tm-bg-pink tm-text-white tm-buy">hourly rate</a>
+                  <span class="tm-text-pink tm-price-tag">$3.75</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="media">
+              <img src="img/girl-lying-on-white-surface-petting-gray-rabbit-1462634.jpg" alt="Image" class="mr-3" style="width:auto;height:140px;">
+              <div class="media-body tm-bg-gray">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-blue">Vestibulum mattis quam sodales</h5>
+                  <p class="mb-0">Maecenas sit amet nibh faucibus, tincidunt nisl sit amet, elementum eros. Fusce congue ligula gravida lorem lacinia.</p>
+                </div>
+                <div class="tm-buy-box">
+                  <a href="#" class="tm-bg-blue tm-text-white tm-buy">hourly rate</a>
+                  <span class="tm-text-blue tm-price-tag">$5.25</span>
+                </div>
+              </div>
+            </div>
+          </div> <!-- media-boxes -->
         </div>
-        <div class="col-8" id="result"> Resultsssss
+      </div>
+
+      <div class="row tm-mb-big tm-subscribe-row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 tm-bg-gray tm-subscribe-form">
+          <h3 class="tm-text-pink tm-mb-30">Subscribe to our updates!</h3>
+          <p class="tm-mb-30">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi semper, ligula et pretium porttitor, leo orci accumsan ligula.</p>
+          <form action="index.html" method="POST">
+            <div class="form-group mb-0">
+              <input type="text" class="form-control tm-subscribe-input" placeholder="Your Email">
+              <input type="submit" value="Submit" class="tm-bg-pink tm-text-white d-block ml-auto tm-subscribe-btn">
+            </div>
+          </form>
         </div>
-    </div>
-    </div>
-    </main>
-    <footer></footer>
-    <script type="text/javascript" src="home.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 img-fluid pl-0 tm-subscribe-img"></div>
+      </div>
+
+      <div class="row tm-mb-medium">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+          <h4 class="mb-4 tm-font-300">Latest News</h4>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Sed fringilla consectetur</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Mauris porta nisl quis</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Quisque maximus quam nec</a>
+          <a href="#" class="tm-text-blue-dark d-block">Class aptent taciti sociosqu ad</a>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 mb-4">
+          <h4 class="mb-4 tm-font-300">Donate to Shelters</h4>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Nam dapibus imperdiet</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Primis in faucibus orci</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Sed interdum blandit dictum</a>
+          <a href="#" class="tm-text-blue-dark d-block">Donec non blandit nisl</a>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6">
+          <h4 class="mb-4 tm-font-300">About Us</h4>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Nullam scelerisque mauris</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Vivamus tristique enim non orci</a>
+          <a href="#" class="tm-text-blue-dark d-block mb-2">Luctus et ultrices posuere</a>
+          <a href="#" class="tm-text-blue-dark d-block">Cubilia Curae</a>
+        </div>
+      </div>
+      <footer class="row">
+        <div class="col-xl-12">
+          <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2020</span> WatchMaDog </p>
+        </div>
+      </footer>
+    </div> <!-- .container -->
+
+  </div> <!-- .main -->
+
+  <!-- load JS -->
+  <script src="js/jquery-3.2.1.slim.min.js"></script> <!-- https://jquery.com/ -->
+  <script>
+
+    /* DOM is ready
+    ------------------------------------------------*/
+    $(function () {
+
+      if (renderPage) {
+        $('body').addClass('loaded');
+      }
+
+      $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+    });
+
+  </script>
 </body>
 </html>
