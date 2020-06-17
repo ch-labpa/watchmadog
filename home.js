@@ -23,9 +23,29 @@ $(document).ready(function() {
     }         
     });
 
-    info = $(this).serialize();
     $('#petForm').on('submit', function(e) {
         e.preventDefault();
+        info = $(this).serialize();
+        var petBoxes = $("#petTypeBox");       
+        var petChecked = false;
+       for (var i = 0; i < petBoxes.length; i++) {
+        if ( petBoxes[i].checked ) {
+            petChecked = true;
+            };
+        };
+        if (!petChecked) {
+            alert('Select at least a pet');
+        }
+        var sizeBoxes = $("#sizeTypeBox");       
+        var sizeChecked = false;
+        for (var i = 0; i < sizeBoxes.length; i++) {
+        if ( sizeBoxes[i].checked ) {
+            sizeChecked = true;
+            };
+        };
+        if (!sizeChecked) {
+            alert('Select at least a size');
+        }
         $.ajax({
             type: "post",
             url: 'petfilter.php',
@@ -33,11 +53,11 @@ $(document).ready(function() {
             success: function(response)
             {
                 alert(info);
-                var res = JSON.parse(response);
+                //var res = JSON.parse(response);
                 var $newdiv1 = $("<div></div>" );
                 var $img = $("<img src=''>");
-                var $name = $("<label>" + res[0].name + "</label>");
-                $("#result").append( $newdiv1, [$img, $name]);
+                var $name = $("<label>" + "res[0].name" + "</label>");
+                $(".media-boxes").append($newdiv1, [$img, $name]);
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert(errorThrown);  
