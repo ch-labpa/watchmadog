@@ -10,8 +10,31 @@
 	$pwd = "";
 	$db = "WatchMaDog";
 	// mysqli_query($db, "SET FOREIGN_KEY_CHECKS=0");
-	//$pet = isset($_POST['pet']) ? $_POST['pet'] : array();
-
+	// $pet = isset($_POST['pet']) ? $_POST['pet'] : array();
+	// $size = isset($_POST['size']) ? $_POST['size'] : array();
+	$pet = [];
+	$size = [];
+	if(isset($_POST['pet'])){
+		if (is_array($_POST['pet'])) {
+		  foreach($_POST['pet'] as $value) {
+			array_push($pet,  $value);
+		  }
+		} else {
+		  $value = $_POST['pet'];
+		  echo $value;
+		}
+	}
+	if(isset($_POST['size'])){
+		if (is_array($_POST['size'])) {
+		  foreach($_POST['size'] as $value) {
+			array_push($size,  $value);
+		  }
+		} else {
+		  $value = $_POST['size'];
+		  echo $value;
+		}
+	}
+	echo print_r($pet) .print_r($size);
     $conn = mysqli_connect($host, $user, $pwd, $db) or die("Unable to connect to the database");
 
 	$query = "SELECT p.`pet_id` AS pid, p.`pet` AS ppet, p.`name` AS pname, p.`size` AS psize, p.`pic_name` AS ppic, p.`calendar` AS pcalendar, p.`max_price` AS pmaxp, p.`owner_id` AS powner FROM `Pets` as p";
@@ -35,5 +58,5 @@
 	}
 	//$myArr = array("John", "Mary", "Peter", "Sally");
 	$json_arr = json_encode($return_arr);
-	echo "json_arr";
+	//echo "json_arr";
 ?>

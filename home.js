@@ -25,10 +25,9 @@ $(document).ready(function() {
 
     $('#petForm').on('submit', function(e) {
         e.preventDefault();
-        info = $(this).serialize();
         var petBoxes = $("#petTypeBox");       
         var petChecked = false;
-       for (var i = 0; i < petBoxes.length; i++) {
+        for (var i = 0; i < petBoxes.length; i++) {
         if ( petBoxes[i].checked ) {
             petChecked = true;
             };
@@ -46,13 +45,14 @@ $(document).ready(function() {
         if (!sizeChecked) {
             alert('Select at least a size');
         }
+        info = $(this).serialize();
         $.ajax({
             type: "post",
             url: 'petfilter.php',
-            data: info,
+            data: $(this).serialize(),
             success: function(response)
             {
-                alert(info);
+                alert(response);
                 //var res = JSON.parse(response);
                 var $newdiv1 = $("<div></div>" );
                 var $img = $("<img src=''>");
