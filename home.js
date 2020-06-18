@@ -22,29 +22,27 @@ $(document).ready(function() {
         $('#petFilter').hide();
     }         
     });
+    
 
     $('#petForm').on('submit', function(e) {
+        var pt = false;
+        var st = false;
         e.preventDefault();
-        var petBoxes = $("#petTypeBox");       
-        var petChecked = false;
-        for (var i = 0; i < petBoxes.length; i++) {
-        if ( petBoxes[i].checked ) {
-            petChecked = true;
-            };
-        };
-        if (!petChecked) {
-            alert('Select at least a pet');
+        var children = $('#petType').children();
+        for (i = 1; i < children.length; i=i+2) {
+            if (children[i].checked) {
+                pt = true;
+            }
         }
-        var sizeBoxes = $("#sizeTypeBox");       
-        var sizeChecked = false;
-        for (var i = 0; i < sizeBoxes.length; i++) {
-        if ( sizeBoxes[i].checked ) {
-            sizeChecked = true;
-            };
-        };
-        if (!sizeChecked) {
-            alert('Select at least a size');
+        var schildren = $('#petSize').children();
+        for (i = 1; i < schildren.length; i=i+2) {
+            if (schildren[i].checked) {
+                st = true;
+            }
         }
+        if (!pt | !st) {
+            alert("check at least one animal or one size");
+        } else {
         info = $(this).serialize();
         $.ajax({
             type: "post",
@@ -63,5 +61,6 @@ $(document).ready(function() {
                 alert(errorThrown);  
             }
         });
+    } //END ELSE
     });
 });  
