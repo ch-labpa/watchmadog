@@ -1,7 +1,7 @@
 <?php
  	header("Access-Control-Allow-Origin: *");
 	// include("includes/conn.php");
-	// session_start();
+	session_start();
 	// if(isset($_SESSION['user'])) header("location: ./");
     // $user_id = '';
     // $_id = '';
@@ -21,7 +21,7 @@
 		  }
 		} else {
 		  $value = $_POST['pet'];
-		  echo $value;
+		  array_push($value, $svalue);
 		}
 	}
 	if(isset($_POST['size'])){
@@ -41,9 +41,6 @@
     foreach($pet as $value) {
 		$i = 0;
 		while ($i < $y) {
-			
-			// echo print_r($size)."SIZ";
-			// echo print_r($values) ."VAL";
 			$thissize = $values[$i];
 			$query = "SELECT p.`pet_id` AS pid, p.`pet` AS ppet, p.`name` AS pname, p.`size` AS psize, p.`pic_name` AS ppic, p.`calendar` AS pcalendar, p.`max_price` AS pmaxp, p.`owner_id` AS powner FROM `Pets` as p WHERE p.`pet`='" .$value ."' AND p.`size` ='" .$thissize ."'";
 			$result = mysqli_query($conn, $query);
@@ -69,24 +66,4 @@
 	}
 	$json_arr = json_encode($return_arr);
 	echo $json_arr;
-	// $query = "SELECT p.`pet_id` AS pid, p.`pet` AS ppet, p.`name` AS pname, p.`size` AS psize, p.`pic_name` AS ppic, p.`calendar` AS pcalendar, p.`max_price` AS pmaxp, p.`owner_id` AS powner FROM `Pets` as p";
-	// $result = mysqli_query($conn, $query);
-
-	
-	// while($row = mysqli_fetch_array($to_ret)){
-	// 	$id = $row['pid'];
-	// 	$pet = $row['ppet'];
-	// 	$name = $row['pname'];
-	// 	$size = $row['psize'];
-	// 	$pic = $row['ppic'];
-	
-	// 	$return_arr[] = array("id" => $id,
-	// 					"pet" => $pet,
-	// 					"name" => $name,
-	// 					"pic" => $pic,
-	// 					"size" => $size);
-	// }
-	//$myArr = array("John", "Mary", "Peter", "Sally");
-	
-	//echo "json_arr";
 ?>

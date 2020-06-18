@@ -87,8 +87,9 @@
                           <form id="petsitterForm" method="post">
                               <div id="petsitterFilter">
                                   <br>
-                                  <label for="#priceSlide">Max price</label>
-                                  <input class="no-border" id="priceSlide" type="range" min="0" max="30" value="0">
+                                  <label for="priceSlide"></label>
+                                  <p id="par">Max Price </p>
+                                  <input id="priceSlide" name="price" type="range" min="0" max="30" value="0" onchange="updateTextInput(this.value)">
                                   <button class="btn btn-primary" id="petsitterSub" type="submit">Submit</button>
                               </div>
                           </form>
