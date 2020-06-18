@@ -50,12 +50,23 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response)
             {
-                alert(response);
-                //var res = JSON.parse(response);
-                var $newdiv1 = $("<div></div>" );
-                var $img = $("<img src=''>");
-                var $name = $("<label>" + "res[0].name" + "</label>");
-                $(".media-boxes").append($newdiv1, [$img, $name]);
+                $('.media-boxes').empty();
+                alert(response); 
+                var res = JSON.parse(response);
+                res.forEach(res => {
+                var id = res['id'];
+                var img = res['img'];
+                var name = res['name'];
+                var size = res['size'];
+                var _newmedia = $("<div class='media'></div>");
+                var _mediabody = $("<div class='media-body tm-bg-gray'></div>");
+                var _img = $("<img  style='width:auto;height:140px;' src='img/"+img+"'>");
+                var _name = $("<label>" + name + "</label>");
+                var _size = $("<label>" + size + "</label>");
+                $(_mediabody).append(_name, _size);
+                $(_newmedia).append(_name, _size);
+                $(".media-boxes").append(_newmedia);
+                });
             },
             error: function(jqXHR, textStatus, errorThrown){
                 alert(errorThrown);  

@@ -36,15 +36,15 @@
 	}
 	$conn = mysqli_connect($host, $user, $pwd, $db) or die("Unable to connect to the database");
 
-	echo print_r($pet) .print_r($size);
+	$values = array_values($size);
 	$y = count($size);
     foreach($pet as $value) {
-		for ($x = 0; $x < $y; $x=$x+1) {
-			// $values = array_values($size);
+		$i = 0;
+		while ($i < $y) {
+			
 			// echo print_r($size)."SIZ";
 			// echo print_r($values) ."VAL";
-			$thissize = $size[$x];
-			echo $thissize."-thissize".$value."-pet\n";
+			$thissize = $values[$i];
 			$query = "SELECT p.`pet_id` AS pid, p.`pet` AS ppet, p.`name` AS pname, p.`size` AS psize, p.`pic_name` AS ppic, p.`calendar` AS pcalendar, p.`max_price` AS pmaxp, p.`owner_id` AS powner FROM `Pets` as p WHERE p.`pet`='" .$value ."' AND p.`size` ='" .$thissize ."'";
 			$result = mysqli_query($conn, $query);
 			if (!$result) {
@@ -61,9 +61,10 @@
 				$return_arr[] = array("id" => $id,
 						"pet" => $pet,
 						"name" => $name,
-						"pic" => $pic,
+						"img" => $pic,
 						"size" => $size);
 			}
+			$i++;
 		}
 	}
 	$json_arr = json_encode($return_arr);
