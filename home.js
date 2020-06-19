@@ -52,6 +52,10 @@ $(document).ready(function() {
             {
                 $('.media-boxes').empty();
                 alert(response); 
+                if (response == "nr"){
+                    var _text = $("<h2>No results<h2/>");
+                    $(".media-boxes").append(_text);
+                } else {
                 var res = JSON.parse(response);
                 res.forEach(res => {
                 var id = res['id'];
@@ -60,14 +64,14 @@ $(document).ready(function() {
                 var size = res['size'];
                 var _newmedia = $("<div class='media'></div>");
                 var _mediabody = $("<div class='media-body tm-bg-gray'></div>");
-                var _img = $("<img  style='width:auto;height:140px;' src='img/"+img+"'>");
+                var _img = $("<img class='pic' style='width:auto;height:140px;' src='img/"+img+"'>");
                 var _name = $("<label>" + name + "</label>");
                 var _size = $("<label>" + size + "</label>");
                 $(_mediabody).append(_name, _size);
                 $(_newmedia).append(_img, _mediabody);
                 $(".media-boxes").append(_newmedia);
                 });
-            },
+            }},
             error: function(jqXHR, textStatus, errorThrown){
                 alert(errorThrown);  
             }
@@ -86,6 +90,10 @@ $(document).ready(function() {
             {
                 $('.media-boxes').empty();
                 alert(response2); 
+                if (response2 == 'nr'){
+                    var text = $("<h2>No results<h2/>");
+                    $(".media-boxes").append(text);
+                } else {
                 var res2 = JSON.parse(response2);
                 res2.forEach(res2 => {
                     var sit_name = res2['name'];
@@ -94,14 +102,14 @@ $(document).ready(function() {
                     var sit_price = res2['price'];
                     var _newmedia_ = $("<div class='media'></div>");
                     var _mediabody_ = $("<div class='media-body tm-bg-gray'></div>");
-                    var _img_ = $("<img  style='width:auto;height:140px;' src='img/"+sit_img+"'>");
+                    var _img_ = $("<img class='pic' style='width:auto;height:140px;!important' src='img/"+sit_img+"'>");
                     var _name_ = $("<label>" + sit_name + "</label>");
-                    var _size_ = $("<label>" + sit_age + "</label>");
-                    $(_mediabody_).append(sit_name, sit_price);
+                    var _age_ = $("<label>" + sit_age + "</label>");
+                    $(_mediabody_).append(_name_ , sit_price, _age_);
                     $(_newmedia_).append(_img_, _mediabody_);
                     $(".media-boxes").append(_newmedia_);
                 });
-            },
+            }},
             error: function(jqXHR, textStatus, errorThrown){
                 alert(errorThrown);  
             }

@@ -64,6 +64,10 @@
 			$i++;
 		}
 	}
+	if (!isset($return_arr)) {
+		echo "nr";
+	} else {
 	$json_arr = json_encode($return_arr);
 	echo $json_arr;
+	}
 ?>

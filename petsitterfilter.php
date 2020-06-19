@@ -5,10 +5,10 @@
 	$user = "root";
 	$pwd = "";
 	$db = "WatchMaDog";
-	$this_id = $_SESSION['user_id'];
+	//$this_id = $_SESSION['user_id'];
 	$conn = mysqli_connect($host, $user, $pwd, $db) or die("Unable to connect to the database");
-	$first_query = "SELECT p.`pet` AS pettype FROM `Users` as u, `Pets` as p WHERE u.`id`= p.`owner_id` AND p.`dogsitter_id` = u.`user_id`";
-	$first_result = mysqli_query($conn, $first_query);
+	// $first_query = "SELECT p.`pet` AS pettype FROM `Users` as u, `Pets` as p WHERE u.`id`= p.`owner_id` AND p.`dogsitter_id` = u.`user_id`";
+	// $first_result = mysqli_query($conn, $first_query);
 	$price;
 	if(isset($_POST['price'])){
 		$price = $_POST['price'];
@@ -34,6 +34,10 @@
 
 			);
 	}
+	if (!isset($return_arr)) {
+		echo "nr";
+	} else {
 	$json_arr = json_encode($return_arr);
 	echo $json_arr;
+	}
 ?>
