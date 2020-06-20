@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="css/user.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">        
+    <link rel="stylesheet" href="css/bootstrap.min.css">                                            
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">                                      
+    <link rel="stylesheet" href="css/tooplate-style.css">
+    
+      <title>User Profile</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+    <div class="tm-main">
+
+        <div class="tm-welcome-section">
+          <div class="container tm-navbar-container">
+              <div class="col-xl-12">
+                <nav class="navbar navbar-expand-sm">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                      <a href="home.html" class="nav-link tm-nav-link tm-text-white active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="login.php" class="nav-link tm-nav-link tm-text-white">SignIn</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="login.php" class="nav-link tm-nav-link tm-text-white">SignUp</a>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+          </div>
+          </div>
+    </div>
+
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+  		<div class="col-sm-10"><h1>User name</h1></div>
+    </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+              
+
+      <div class="text-center">
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <h6>Upload a different photo...</h6>
+        <input type="file" class="text-center center-block file-upload">
+      </div></hr><br>
+
+               
+          <div class="panel panel-default">
+            <div class="panel-heading">Personal Information <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body">
+                <p>Name Lastname
+                    Date of birth
+                    Location
+                </p>
+            </div>
+          </div>
+          
+          
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Pets <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Pet#1</strong></span></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Pet#2</strong></span></li>
+          </ul> 
+            
+          
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#settings">Settings</a></li>
+              </ul>
+
+              
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <hr>
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+                          
+                          <div class="col-m-9">
+                              <label for="add_pet"><h4>Add Pet</h4></label>
+                              <input type="text" class="form-control" name="add_pet" id="add_pet" placeholder="Enter pet name" title="add pet">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-m-9">
+                            <label for="size"><h4>Enter Size</h4></label>
+                              <input type="radio" class="form-control" name="size" value="small">
+                              <label for="small">Small</label><br>
+                              <input type="radio" class="form-control" name="size" value="med">
+                              <label for="med">Medium</label><br>
+                              <input type="radio" class="form-control" name="size" value="big">
+                              <label for="big">Big</label><br>
+                          </div>
+                      </div>
+          
+                    
+                    </form>
+                <hr>
+              
+             </div>
+               
+            </div><!--/tab-pane-->
+             <div class="tab-pane fade" id="settings">
+                  <hr>
+                  <form class="form" action="#onclick" method="post">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="pw_change"><h4>Old Password</h4></label>
+                              <input type="text" class="form-control" name="pw_change" id="pw_change" placeholder="Insert old password" title="Change password">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                            <label for="new_pw"><h4>New Password</h4></label>
+                              <input type="text" class="form-control" name="new_pw" id="new_pw" placeholder="Insert new password">
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="repeat_pw"><h4>Repeat Password</h4></label>
+                              <input type="text" class="repeat_pw" name="repeat_pw" id="repeat_pw" placeholder="Reapeat new password">
+                          </div>
+                      </div>
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                            </div>
+                      </div>
+              	</form>
+              </div>
+               
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+                                                      
+
+
+
+
+    
+</body>
+</html>
