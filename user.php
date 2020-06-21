@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="css/user.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">        
-    <link rel="stylesheet" href="css/bootstrap.min.css">                                            
-    <link rel="stylesheet" href="css/fontawesome-all.min.css">                                      
-    <link rel="stylesheet" href="css/tooplate-style.css">
+                                        
+    <link rel="stylesheet" href="css/main.css">
     
       <title>User Profile</title>
       <meta charset="utf-8">
@@ -22,7 +13,7 @@
  
 </head>
 <body>
-<style> body {background: #5fe1aa;} </style>
+<style> body {background: #8AE9C1;} </style>
     <div class="tm-main">
 
         <div class="tm-welcome-section">
