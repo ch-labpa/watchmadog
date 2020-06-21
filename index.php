@@ -55,8 +55,8 @@
             <div class="form-group">
               <p>Pets</p>
               <div class="custom-control custom-switch custom-switch-lg">
-                <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                <label class="custom-control-label" for="customSwitch5"></label>
+                <input type="checkbox" class="custom-control-input" id="mode">
+                <label class="custom-control-label" for="mode"></label>
               </div>
               <p>Pet sitter</p>
             </div>
@@ -72,11 +72,6 @@
         <h2 class="mt-5">Feed</h2>
           <div style="margin-left: 0;" class="row">
               <div class="sidebar col-3 tm-bg-gray">
-                      <select id="owner-sitter" class="form-control">
-                          <option id="toHide" value="">What are you looking for?</option>
-                          <option value="Pet">Pet</option>
-                          <option value="Pet-sitter">Pet-sitter</option>
-                      </select>
                       <div id="filter">
                           <form id="petForm" method="post">
                               <div id="petFilter">
@@ -105,12 +100,15 @@
                           <form id="petsitterForm" method="post">
                               <div id="petsitterFilter">
                                   <br>
-                                  <p id="par">Max Price </p>
-                                  <input id="priceSlide" name="price" type="range" min="0" max="30" value="0" onchange="updateTextInput(this.value)">
+                                  <div class="form-row optional pet">
+                                    <label for="hrpetsitterfilter">Hourly rate</label>
+                                    <input onchange="updateTextInput(this.value)" type="range" min="5" max="30" value="18" class="slider" id="hrpetsitterfilter" name="hrpetsitterfilter">
+                                    <p>$<span id="hrpetfilterop">15</span></p>
+                                  </div>
                                   <div>
                                     <br>
-                                  <button class="btn btn-primary" id="petsitterSub" type="submit" style="">Submit</button>
-                                </div>
+                                    <button class="btn btn-primary" id="petsitterSub" type="submit" style="">Submit</button>
+                                  </div>
                                 </div>
                           </form>
                     </div>
@@ -328,6 +326,7 @@
                                 <option selected>Choose one...</option>
                                 <option value="dog">Dogs</option>
                                 <option value="cat">Cats</option>
+                                <option value="both">Both</option>
                             </select>
                         </div>
                     </div>
