@@ -70,22 +70,23 @@ a:hover {
     width: 100%;
     height: 96px;
     font-size: 1.2rem;
-}
-
-.tm-search-box {
-    width: 100%;
-    padding: 0 20px;
+    padding: 0 100px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
-.tm-search-box p {margin: 0 10px;}
+.tm-search-form .form-group {
+    align-self: center;
+}
 
-.tm-advanced-box { width: 20%; }
+.tm-search-form .form-group p {
+    padding: 0;
+    margin: 0 10px;
+}
 
 .custom-switch.custom-switch-lg .custom-control-label {
     padding-left: 1.5rem;
@@ -122,19 +123,58 @@ a:hover {
     font-size: 20px;
     background: #7CD1AD;
     color: #1D2020;
-    width: 50%;
+    width: 100%;
     border: 1px solid transparent;
     border-radius: 15px;
 }
 
 .form-control.tm-search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #202f26;
+    color: #1D2020;
     opacity: 1; /* Firefox */
 }
 
 .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #202f26;
     opacity: 1; /* Firefox */
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    background: #fff;
+    border-radius: 15px;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    margin: 0 18px 0 10px;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+/*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+/*when navigating through the items using the arrow keys:*/
+background-color: DodgerBlue !important;
+color: #ffffff;
 }
 
 .form-control {
@@ -286,7 +326,7 @@ a:hover {
 .tab-menu a.active {background:#fff;color: #202f26}
 
 .ls-box .tab form {text-align:left;position: relative;}
-::placeholder {color:#b4b4b4!important;}
+.ls-box .tab form input::placeholder {color:#b4b4b4!important;}
 .ls-box .tab .form-row {margin: 30px 0;}
 .ls-box .tab .optional {flex-wrap: wrap;align-items: center;margin:20px 0 30px;}
 .ls-box .tab form label, .ls-box .tab form legend {color: #727272;padding:0;margin:0 0 5px;}
