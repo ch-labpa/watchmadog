@@ -1,5 +1,6 @@
 var ns;
 $(function(){
+
     $('.logintab').on('click', function(){
         $('.ls-box').find('.tab').removeClass('active');
         $('.signuptab').removeClass('active');
@@ -24,7 +25,7 @@ $(function(){
         $(this).siblings(".custom-file-label").addClass("selected").css('color', '#4CAF50').html(fileName);
     });
 
-    $('form').on('submit', function(e){
+    $('.tab form').on('submit', function(e){
         e.preventDefault();
         FS($(this).serialize(), $(this).attr('id'));
         return false;
@@ -49,10 +50,9 @@ $(function(){
 var FS = (form, formID) => {
     $.post('includes/userHandling.php', form, function(data){
         if (data.status == '1') {
-            if (data.action == 'redirect') top.location.href = 'home.php';
+            if (data.action == 'redirect') top.location.href = './';
         } else {
-            if (nextStep(formID)) ;
-
+            if (nextStep(formID)); //add implementation
             if (data.error) $('.tab.active .warning-text').html(data.error);
             else $('.tab.active .warning-text').html("Whoa! Remember to fill in all fields.");
         }
