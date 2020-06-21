@@ -1,5 +1,7 @@
 <?php
     session_start();
+    $auth = false;
+    if (isset($_SESSION['user'])) $auth = true;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"> 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  <link rel="stylesheet" href="css/fontawesome-all.min.css">
-  <link rel="stylesheet" href="css/tooplate-style.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -25,9 +27,15 @@
           <div class="col-12">
             <nav class="navbar navbar-expand-sm">
               <ul class="navbar-nav ml-auto">
+              <?php if (!$auth) { ?>
                 <li class="nav-item">
                   <a href="#" onclick="openModal()" class="nav-link tm-nav-link">Log In / Sign up</a>
                 </li>
+                <?php } else { ?>
+                <li class="nav-item">
+                  <a href="profile.php" class="nav-link tm-nav-link"><i class="fas fa-user"></i> My Profile</a>
+                </li>
+                <?php } ?>
               </ul>
             </nav>
           </div>
@@ -43,20 +51,24 @@
 
     <div class="container">
       <div class="tm-search-form-container">
-        <form id ="location" action="index.html" method="GET" class="form-inline tm-search-form">
-            <div class="form-group tm-search-box">
+        <form id="search" action="" method="GET" class="form-inline tm-search-form">
+            <div class="form-group">
               <p>Pets</p>
               <div class="custom-control custom-switch custom-switch-lg">
                 <input type="checkbox" class="custom-control-input" id="customSwitch5">
                 <label class="custom-control-label" for="customSwitch5"></label>
               </div>
               <p>Pet sitter</p>
-              <input type="text" name="keyword" class="form-control tm-search-input" placeholder="Search by province...">
-              <a href="#" class="tm-search-submit">Search</a>
             </div>
+            <div class="autocomplete form-group flex-fill">
+              <input type="text" name="keyword" class="form-control tm-search-input" id="search-input" placeholder="Search by province...">
+            </div>
+            <a href="#" class="tm-search-submit">Search</a>
         </form>
-        </div>
-        
+      </div>
+    </div>
+      
+      <div class="container">
         <h2 class="mt-5">Feed</h2>
           <div style="margin-left: 0;" class="row">
               <div class="sidebar col-3 tm-bg-gray">
@@ -332,5 +344,197 @@
             </div>
         </div>
     </div>
+    <script>
+      function autocomplete(inp, arr) {
+        var currentFocus;
+
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+
+            this.parentNode.appendChild(a);
+
+            for (i = 0; i < arr.length; i++) {
+
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+                b = document.createElement("DIV");
+
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+                b.addEventListener("click", function(e) {
+
+                    inp.value = this.getElementsByTagName("input")[0].value;
+
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
+            }
+        });
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) {
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    provinces = [
+      'Agrigento',
+      'Alessandria',
+      'Ancona',
+      'Aosta',
+      'Arezzo',
+      'Ascoli Piceno',
+      'Asti',
+      'Avellino',
+      'Bari',
+      'Barletta-Andria-Trani',
+      'Belluno',
+      'Benevento',
+      'Bergamo',
+      'Biella',
+      'Bologna',
+      'Bolzano',
+      'Brescia',
+      'Brindisi',
+      'Cagliari',
+      'Caltanissetta',
+      'Campobasso',
+      'Carbonia-Iglesias',
+      'Caserta',
+      'Catania',
+      'Catanzaro',
+      'Chieti',
+      'Como',
+      'Cosenza',
+      'Cremona',
+      'Crotone',
+      'Cuneo',
+      'Enna',
+      'Fermo',
+      'Ferrara',
+      'Firenze',
+      'Foggia',
+      'Forlì-Cesena',
+      'Frosinone',
+      'Genova',
+      'Gorizia',
+      'Grosseto',
+      'Imperia',
+      'Isernia',
+      'La Spezia',
+      'L\'Aquila',
+      'Latina',
+      'Lecce',
+      'Lecco',
+      'Livorno',
+      'Lodi',
+      'Lucca',
+      'Macerata',
+      'Mantova',
+      'Massa-Carrara',
+      'Matera',
+      'Messina',
+      'Milano',
+      'Modena',
+      'Monza e della Brianza',
+      'Napoli',
+      'Novara',
+      'Nuoro',
+      'Olbia-Tempio',
+      'Oristano',
+      'Padova',
+      'Palermo',
+      'Parma',
+      'Pavia',
+      'Perugia',
+      'Pesaro e Urbino',
+      'Pescara',
+      'Piacenza',
+      'Pisa',
+      'Pistoia',
+      'Pordenone',
+      'Potenza',
+      'Prato',
+      'Ragusa',
+      'Ravenna',
+      'Reggio Calabria',
+      'Reggio Emilia',
+      'Rieti',
+      'Rimini',
+      'Roma',
+      'Rovigo',
+      'Salerno',
+      'Medio Campidano',
+      'Sassari',
+      'Savona',
+      'Siena',
+      'Siracusa',
+      'Sondrio',
+      'Taranto',
+      'Teramo',
+      'Terni',
+      'Torino',
+      'Ogliastra',
+      'Trapani',
+      'Trento',
+      'Treviso',
+      'Trieste',
+      'Udine',
+      'Varese',
+      'Venezia',
+      'Verbano-Cusio-Ossola',
+      'Vercelli',
+      'Verona',
+      'Vibo Valentia',
+      'Vicenza',
+      'Viterbo',
+    ];
+    console.log(autocomplete(document.getElementById('search-input'), provinces));
+  </script>
 </body>
 </html>
