@@ -1,5 +1,7 @@
 <?php
     session_start();
+    if (isset($_SESSION['user'])) $auth = true;
+    else $auth = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"> 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  <link rel="stylesheet" href="css/fontawesome-all.min.css">
-  <link rel="stylesheet" href="css/tooplate-style.css">
+  <link rel="stylesheet" href="css/main.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -18,6 +20,23 @@
   <script type="text/javascript" src="js/userhandler.js"></script>
 </head>
 <body>
+  <div class="navbar-mobile">
+    <img src="img/logo.png" alt="Watchmadog">
+    <ul class="navbar-nav ml-auto">
+      <?php if (!$auth) { ?>
+        <li class="nav-item">
+          <a href="#" onclick="openModal()" class="nav-link tm-nav-link">Log In / Sign up</a>
+        </li>
+        <?php } else { ?>
+        <li class="nav-item">
+          <a href="profile.php" class="nav-link tm-nav-link"><i class="fas fa-user"></i> My Profile</a>
+        </li>
+        <li class="nav-item">
+        <a href="includes/logout.php" class="nav-link tm-nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+        </li>
+        <?php } ?>
+      </ul>
+  </div>
   <div class="tm-main">
     <div class="h-25 tm-welcome-section">
       <div class="container tm-navbar-container">
@@ -25,9 +44,18 @@
           <div class="col-12">
             <nav class="navbar navbar-expand-sm">
               <ul class="navbar-nav ml-auto">
+              <?php if (!$auth) { ?>
                 <li class="nav-item">
                   <a href="#" onclick="openModal()" class="nav-link tm-nav-link">Log In / Sign up</a>
                 </li>
+                <?php } else { ?>
+                <li class="nav-item">
+                  <a href="profile.php" class="nav-link tm-nav-link"><i class="fas fa-user"></i> My Profile</a>
+                </li>
+                <li class="nav-item">
+                <a href="includes/logout.php" class="nav-link tm-nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                </li>
+                <?php } ?>
               </ul>
             </nav>
           </div>
@@ -43,28 +71,26 @@
 
     <div class="container">
       <div class="tm-search-form-container">
-        <form id ="location" action="index.html" method="GET" class="form-inline tm-search-form">
-            <div class="form-group tm-search-box">
+        <form id="search" action="" method="GET" class="form-inline tm-search-form">
+            <div class="form-group switch">
               <p>Pets</p>
               <div class="custom-control custom-switch custom-switch-lg">
-                <input type="checkbox" class="custom-control-input" id="customSwitch5">
-                <label class="custom-control-label" for="customSwitch5"></label>
+                <input type="checkbox" class="custom-control-input" id="mode">
+                <label class="custom-control-label" for="mode"></label>
               </div>
               <p>Pet sitter</p>
-              <input type="text" name="keyword" class="form-control tm-search-input" placeholder="Search by province...">
-              <a href="#" class="tm-search-submit">Search</a>
             </div>
+            <div class="autocomplete form-group flex-fill">
+              <input type="text" name="keyword" class="form-control tm-search-input" id="search-input" placeholder="Search by province...">
+            </div>
+            <a href="#" class="tm-search-submit">Search</a>
         </form>
-        </div>
-        
-        <h2 class="mt-5">Feed</h2>
-          <div style="margin-left: 0;" class="row">
+      </div>
+    </div>
+      
+      <div class="container">
+          <div style="margin-left: 0;" class="row main">
               <div class="sidebar col-3 tm-bg-gray">
-                      <select id="owner-sitter" class="form-control">
-                          <option id="toHide" value="">What are you looking for?</option>
-                          <option value="Pet">Pet</option>
-                          <option value="Pet-sitter">Pet-sitter</option>
-                      </select>
                       <div id="filter">
                           <form id="petForm" method="post">
                               <div id="petFilter">
@@ -93,12 +119,15 @@
                           <form id="petsitterForm" method="post">
                               <div id="petsitterFilter">
                                   <br>
-                                  <p id="par">Max Price </p>
-                                  <input id="priceSlide" name="price" type="range" min="0" max="30" value="0" onchange="updateTextInput(this.value)">
+                                  <div class="form-row optional pet">
+                                    <label for="hrpetsitterfilter">Hourly rate</label>
+                                    <input onchange="updateTextInput(this.value)" type="range" min="5" max="30" value="18" class="slider" id="hrpetsitterfilter" name="hrpetsitterfilter">
+                                    <p>$<span id="hrpetfilterop">15</span></p>
+                                  </div>
                                   <div>
                                     <br>
-                                  <button class="btn btn-primary" id="petsitterSub" type="submit" style="">Submit</button>
-                                </div>
+                                    <button class="btn btn-primary" id="petsitterSub" type="submit" style="">Submit</button>
+                                  </div>
                                 </div>
                           </form>
                     </div>
@@ -202,36 +231,16 @@
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <label for="region">Region</label>
-                            <select id="region" class="form-control">
+                            <label for="province">Province</label>
+                            <select name="province" id="province" class="form-control">
                                 <option selected>Choose one...</option>
-                                <option value="Abruzzo">Abruzzo</option>
-                                <option value="Basilicata">Basilicata</option>
-                                <option value="Calabria">Calabria</option>
-                                <option value="Campania">Campania</option>
-                                <option value="Emilia-Romagna">Emilia-Romagna</option>
-                                <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
-                                <option value="Lazio">Lazio</option>
-                                <option value="Liguria">Liguria</option>
-                                <option value="Lombardia">Lombardia</option>
-                                <option value="Marche">Marche</option>
-                                <option value="Molise">Molise</option>
-                                <option value="Piemonte">Piemonte</option>
-                                <option value="Puglia">Puglia (Apulia)</option>
-                                <option value="Sardegna">Sardegna (Sardinia)</option>
-                                <option value="Sicialia">Sicialia (Sicily)</option>
-                                <option value="Toscana">Toscana (Tuscany)</option>
-                                <option value="Trentino-Alto Adige">Trentino-Alto Adige (Trentino-South Tyrol)</option>
-                                <option value="Umbria">Umbria</option>
-                                <option value="Valle d'Aosta">Valle d'Aosta (Aosta Valley)</option>
-                                <option value="Veneto">Veneto</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="birthyear">Specify your birth year</label>
-                            <input class="col-lg-4 form-control" type="text" pattern="[0-9]" name="birthyear" maxlength="4" minlength="4" placeholder="eg: 1990">
+                            <input class="col-lg-4 form-control" type="number" name="birthyear" maxlength="4" minlength="4" placeholder="eg: 1990">
                         </div>
                         <div class="col">
                             <legend class="col-form-label">Signing up as...</legend>
@@ -273,8 +282,8 @@
                     <div class="form-row">
                         <legend class="col-form-label">Upload a profile picture of your pet</legend>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="petpic">
-                            <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="customFile">Choose a profile picture</label>
+                            <input type="file" class="custom-file-input" name="file">
+                            <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="petpic">Choose a profile picture</label>
                         </div>
                     </div>
                     <div class="form-row">
@@ -306,8 +315,8 @@
                         <div class="col">
                             <legend class="col-form-label">Upload a profile picture</legend>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="petsitterpic">
-                                <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="customFile">Choose a profile picture</label>
+                                <input type="file" class="custom-file-input" name="file">
+                                <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="petsitterpic">Choose a profile picture</label>
                             </div>
                         </div>
                         <div class="col">
@@ -316,6 +325,7 @@
                                 <option selected>Choose one...</option>
                                 <option value="dog">Dogs</option>
                                 <option value="cat">Cats</option>
+                                <option value="both">Both</option>
                             </select>
                         </div>
                     </div>
@@ -332,5 +342,202 @@
             </div>
         </div>
     </div>
+    <script>
+      function autocomplete(inp, arr) {
+        var currentFocus;
+
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+
+            this.parentNode.appendChild(a);
+
+            for (i = 0; i < arr.length; i++) {
+
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+
+                b = document.createElement("DIV");
+
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+
+                b.addEventListener("click", function(e) {
+
+                    inp.value = this.getElementsByTagName("input")[0].value;
+
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
+            }
+        });
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) {
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+    var provinces = [
+      'Agrigento',
+      'Alessandria',
+      'Ancona',
+      'Aosta',
+      'Arezzo',
+      'Ascoli Piceno',
+      'Asti',
+      'Avellino',
+      'Bari',
+      'Barletta-Andria-Trani',
+      'Belluno',
+      'Benevento',
+      'Bergamo',
+      'Biella',
+      'Bologna',
+      'Bolzano',
+      'Brescia',
+      'Brindisi',
+      'Cagliari',
+      'Caltanissetta',
+      'Campobasso',
+      'Carbonia-Iglesias',
+      'Caserta',
+      'Catania',
+      'Catanzaro',
+      'Chieti',
+      'Como',
+      'Cosenza',
+      'Cremona',
+      'Crotone',
+      'Cuneo',
+      'Enna',
+      'Fermo',
+      'Ferrara',
+      'Firenze',
+      'Foggia',
+      'Forlì-Cesena',
+      'Frosinone',
+      'Genova',
+      'Gorizia',
+      'Grosseto',
+      'Imperia',
+      'Isernia',
+      'La Spezia',
+      'L\'Aquila',
+      'Latina',
+      'Lecce',
+      'Lecco',
+      'Livorno',
+      'Lodi',
+      'Lucca',
+      'Macerata',
+      'Mantova',
+      'Massa-Carrara',
+      'Matera',
+      'Messina',
+      'Milano',
+      'Modena',
+      'Monza e della Brianza',
+      'Napoli',
+      'Novara',
+      'Nuoro',
+      'Olbia-Tempio',
+      'Oristano',
+      'Padova',
+      'Palermo',
+      'Parma',
+      'Pavia',
+      'Perugia',
+      'Pesaro e Urbino',
+      'Pescara',
+      'Piacenza',
+      'Pisa',
+      'Pistoia',
+      'Pordenone',
+      'Potenza',
+      'Prato',
+      'Ragusa',
+      'Ravenna',
+      'Reggio Calabria',
+      'Reggio Emilia',
+      'Rieti',
+      'Rimini',
+      'Roma',
+      'Rovigo',
+      'Salerno',
+      'Medio Campidano',
+      'Sassari',
+      'Savona',
+      'Siena',
+      'Siracusa',
+      'Sondrio',
+      'Taranto',
+      'Teramo',
+      'Terni',
+      'Torino',
+      'Ogliastra',
+      'Trapani',
+      'Trento',
+      'Treviso',
+      'Trieste',
+      'Udine',
+      'Varese',
+      'Venezia',
+      'Verbano-Cusio-Ossola',
+      'Vercelli',
+      'Verona',
+      'Vibo Valentia',
+      'Vicenza',
+      'Viterbo',
+    ];
+    autocomplete(document.getElementById('search-input'), provinces);
+    console.log(provinces)
+    $.each(provinces, function(i, v){
+      var $option = $('<option>').val(v).text(v);
+      $('#province').append($option);
+    })
+  </script>
 </body>
 </html>

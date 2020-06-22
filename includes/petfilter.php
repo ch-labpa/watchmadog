@@ -1,14 +1,10 @@
 <?php
  	header("Access-Control-Allow-Origin: *");
-	// include("includes/conn.php");
+	include("conn.php");
 	session_start();
 	// if(isset($_SESSION['user'])) header("location: ./");
     // $user_id = '';
     // $_id = '';
-	$host = "localhost";
-	$user = "root";
-	$pwd = "";
-	$db = "WatchMaDog";
 	// mysqli_query($db, "SET FOREIGN_KEY_CHECKS=0");
 	// $pet = isset($_POST['pet']) ? $_POST['pet'] : array();
 	// $size = isset($_POST['size']) ? $_POST['size'] : array();
@@ -34,7 +30,6 @@
 		  array_push($size, $svalue);
 		}
 	}
-	$conn = mysqli_connect($host, $user, $pwd, $db) or die("Unable to connect to the database");
 
 	$values = array_values($size);
 	$y = count($size);
@@ -43,9 +38,9 @@
 		while ($i < $y) {
 			$thissize = $values[$i];
 			$query = "SELECT p.`pet_id` AS pid, p.`pet` AS ppet, p.`name` AS pname, p.`size` AS psize, p.`pic_name` AS ppic, p.`calendar` AS pcalendar, p.`max_price` AS pmaxp, p.`owner_id` AS powner FROM `Pets` as p WHERE p.`pet`='" .$value ."' AND p.`size` ='" .$thissize ."'";
-			$result = mysqli_query($conn, $query);
+			$result = mysqli_query($db, $query);
 			if (!$result) {
-				printf("Error: %s\n", mysqli_error($conn));
+				printf("Error: %s\n", mysqli_error($db));
 				exit();
 			}
 			while($row = mysqli_fetch_array($result)){

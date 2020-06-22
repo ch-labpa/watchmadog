@@ -1,32 +1,30 @@
-
-$(document).ready(function() { 
-    var renderPage = true;
-    if (navigator.userAgent.indexOf('MSIE') !== -1
-      || navigator.appVersion.indexOf('Trident/') > 0) {
-      /* Microsoft Internet Explorer detected in. */
-      alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
-      renderPage = false;
-    }
-    
-    $('#petsitterFilter').hide();
-    $('#petFilter').hide();
-    $("#owner-sitter").change(function (){ 
-
-    if (document.getElementById('owner-sitter').value == "Pet") {
-    //pet features: pet, size, calendar
-        $('#toHide').hide();
-        $('#petsitterFilter').hide();
-        $('#petFilter').show();
-    } else {
-        $('#toHide').hide();
-        $('#petsitterFilter').show();
-        $('#petFilter').hide();
-    }         
+var mode = true;
+$(function() {
+    $('#mode').on('click', function(){
+        mode = !mode;
+        if (mode) {
+            $('#toHide').hide();
+            $('#petsitterFilter').hide();
+            $('#petFilter').show();
+        } else {
+            $('#toHide').hide();
+            $('#petsitterFilter').show();
+            $('#petFilter').hide();
+        }
     });
-   
+    $('#search').on('submit', function(e){
+        e.preventDefault();
+        FS($(this).serialize(), $(this).attr('id'));
+        return false;
+    });
+    $('#petsitterFilter').hide();
+    var outputd = $("#hrpetfilterop");
+
+    $('#hrpetsitterfilter').on('input change', function(){
+        outputd.html($(this).val());
+    });
+});  
     $('#petForm').on('submit', function(e) {
-        var pt = false;
-        var st = false;
         e.preventDefault();
         var children = $('#petType').children();
         for (i = 1; i < children.length; i=i+2) {
@@ -46,7 +44,7 @@ $(document).ready(function() {
         info = $(this).serialize();
         $.ajax({
             type: "post",
-            url: 'petfilter.php',
+            url: 'includes/petfilter.php',
             data: info,
             success: function(response)
             {
@@ -84,7 +82,7 @@ $(document).ready(function() {
         info = $(this).serialize();
         $.ajax({
             type: "post",
-            url: 'petsitterfilter.php',
+            url: 'includes/petsitterfilter.php',
             data: info,
             success: function(response2)
             {
@@ -115,7 +113,6 @@ $(document).ready(function() {
             }
         });
     });
-});  
 function updateTextInput(val) {
     $('#par').text("Max price " + val + "€");
 }
