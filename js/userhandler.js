@@ -27,7 +27,7 @@ $(function(){
 
     $('.tab form').on('submit', function(e){
         e.preventDefault();
-        FS($(this).serialize(), $(this).attr('id'));
+        FS(this, $(this).attr('id'));
         return false;
     });
     
@@ -48,15 +48,22 @@ $(function(){
 });
 
 var FS = (form, formID) => {
-    $.post('includes/userHandling.php', form, function(data){
+    var formData = new FormData(form);
+    $.post({
+        url: 'includes/userHandling.php', data: formData,
+        cache: false,
+        contentType: false,
+        processData: false
+    }).done(function(res){
+        data = JSON.parse(res);
         if (data.status == '1') {
             if (data.action == 'redirect') top.location.href = './';
+            nextStep(formID);
         } else {
-            if (nextStep(formID)); //add implementation
             if (data.error) $('.tab.active .warning-text').html(data.error);
             else $('.tab.active .warning-text').html("Whoa! Remember to fill in all fields.");
         }
-    }, 'json').fail(function(xhr, err, status){console.log(xhr, err, status)});
+    }).fail(function(xhr, err, status){console.log(xhr, err, status)});
 }
 
 var nextStep = (formID) => {
