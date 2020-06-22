@@ -44,7 +44,7 @@ $(function() {
         info = $(this).serialize();
         $.ajax({
             type: "post",
-            url: '/watchmadog/includes/petfilter.php',
+            url: 'includes/petfilter.php',
             data: info,
             success: function(response)
             {
@@ -82,7 +82,7 @@ $(function() {
         info = $(this).serialize();
         $.ajax({
             type: "post",
-            url: '/watchmadog/includes/petsitterfilter.php',
+            url: 'includes/petsitterfilter.php',
             data: info,
             success: function(response2)
             {
