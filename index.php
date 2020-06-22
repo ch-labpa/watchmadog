@@ -1,7 +1,7 @@
 <?php
     session_start();
-    $auth = false;
     if (isset($_SESSION['user'])) $auth = true;
+    else $auth = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,8 @@
   <title>WatchMaDog</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"> 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">  <link rel="stylesheet" href="css/fontawesome-all.min.css">
   <link rel="stylesheet" href="css/main.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,6 +20,23 @@
   <script type="text/javascript" src="js/userhandler.js"></script>
 </head>
 <body>
+  <div class="navbar-mobile">
+    <img src="img/logo.png" alt="Watchmadog">
+    <ul class="navbar-nav ml-auto">
+      <?php if (!$auth) { ?>
+        <li class="nav-item">
+          <a href="#" onclick="openModal()" class="nav-link tm-nav-link">Log In / Sign up</a>
+        </li>
+        <?php } else { ?>
+        <li class="nav-item">
+          <a href="profile.php" class="nav-link tm-nav-link"><i class="fas fa-user"></i> My Profile</a>
+        </li>
+        <li class="nav-item">
+        <a href="includes/logout.php" class="nav-link tm-nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
+        </li>
+        <?php } ?>
+      </ul>
+  </div>
   <div class="tm-main">
     <div class="h-25 tm-welcome-section">
       <div class="container tm-navbar-container">
@@ -34,6 +51,9 @@
                 <?php } else { ?>
                 <li class="nav-item">
                   <a href="profile.php" class="nav-link tm-nav-link"><i class="fas fa-user"></i> My Profile</a>
+                </li>
+                <li class="nav-item">
+                <a href="includes/logout.php" class="nav-link tm-nav-link"><i class="fas fa-sign-out-alt"></i> Log out</a>
                 </li>
                 <?php } ?>
               </ul>
@@ -52,7 +72,7 @@
     <div class="container">
       <div class="tm-search-form-container">
         <form id="search" action="" method="GET" class="form-inline tm-search-form">
-            <div class="form-group">
+            <div class="form-group switch">
               <p>Pets</p>
               <div class="custom-control custom-switch custom-switch-lg">
                 <input type="checkbox" class="custom-control-input" id="mode">
@@ -69,8 +89,7 @@
     </div>
       
       <div class="container">
-        <h2 class="mt-5">Feed</h2>
-          <div style="margin-left: 0;" class="row">
+          <div style="margin-left: 0;" class="row main">
               <div class="sidebar col-3 tm-bg-gray">
                       <div id="filter">
                           <form id="petForm" method="post">
@@ -212,36 +231,16 @@
                     </div>
                     <div class="form-row">
                         <div class="col">
-                            <label for="region">Region</label>
-                            <select id="region" class="form-control">
+                            <label for="province">Province</label>
+                            <select name="province" id="province" class="form-control">
                                 <option selected>Choose one...</option>
-                                <option value="Abruzzo">Abruzzo</option>
-                                <option value="Basilicata">Basilicata</option>
-                                <option value="Calabria">Calabria</option>
-                                <option value="Campania">Campania</option>
-                                <option value="Emilia-Romagna">Emilia-Romagna</option>
-                                <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
-                                <option value="Lazio">Lazio</option>
-                                <option value="Liguria">Liguria</option>
-                                <option value="Lombardia">Lombardia</option>
-                                <option value="Marche">Marche</option>
-                                <option value="Molise">Molise</option>
-                                <option value="Piemonte">Piemonte</option>
-                                <option value="Puglia">Puglia (Apulia)</option>
-                                <option value="Sardegna">Sardegna (Sardinia)</option>
-                                <option value="Sicialia">Sicialia (Sicily)</option>
-                                <option value="Toscana">Toscana (Tuscany)</option>
-                                <option value="Trentino-Alto Adige">Trentino-Alto Adige (Trentino-South Tyrol)</option>
-                                <option value="Umbria">Umbria</option>
-                                <option value="Valle d'Aosta">Valle d'Aosta (Aosta Valley)</option>
-                                <option value="Veneto">Veneto</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="birthyear">Specify your birth year</label>
-                            <input class="col-lg-4 form-control" type="text" pattern="[0-9]" name="birthyear" maxlength="4" minlength="4" placeholder="eg: 1990">
+                            <input class="col-lg-4 form-control" type="number" name="birthyear" maxlength="4" minlength="4" placeholder="eg: 1990">
                         </div>
                         <div class="col">
                             <legend class="col-form-label">Signing up as...</legend>
@@ -283,8 +282,8 @@
                     <div class="form-row">
                         <legend class="col-form-label">Upload a profile picture of your pet</legend>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="petpic">
-                            <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="customFile">Choose a profile picture</label>
+                            <input type="file" class="custom-file-input" name="file">
+                            <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="petpic">Choose a profile picture</label>
                         </div>
                     </div>
                     <div class="form-row">
@@ -316,8 +315,8 @@
                         <div class="col">
                             <legend class="col-form-label">Upload a profile picture</legend>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="petsitterpic">
-                                <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="customFile">Choose a profile picture</label>
+                                <input type="file" class="custom-file-input" name="file">
+                                <label style="color: #b4b4b4; padding: .375rem .7rem" class="custom-file-label" for="petsitterpic">Choose a profile picture</label>
                             </div>
                         </div>
                         <div class="col">
@@ -421,7 +420,7 @@
             closeAllLists(e.target);
         });
     }
-    provinces = [
+    var provinces = [
       'Agrigento',
       'Alessandria',
       'Ancona',
@@ -533,7 +532,12 @@
       'Vicenza',
       'Viterbo',
     ];
-    console.log(autocomplete(document.getElementById('search-input'), provinces));
+    autocomplete(document.getElementById('search-input'), provinces);
+    console.log(provinces)
+    $.each(provinces, function(i, v){
+      var $option = $('<option>').val(v).text(v);
+      $('#province').append($option);
+    })
   </script>
 </body>
 </html>
