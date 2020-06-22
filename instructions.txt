@@ -1,0 +1,5 @@
+In order to load the application, run XAMPP and place the project folder in htdocs. Then go to localhost/index.php and browse around all the features!
+- See results
+- Login/Signup
+- Add filters to search
+- Edit personal information after signing up
