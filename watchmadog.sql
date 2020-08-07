@@ -39,15 +39,15 @@ CREATE TABLE `Dogsitters` (
 --
 
 INSERT INTO `Dogsitters` (`dogsitter_id`, `price`, `calendar`, `pic_name`, `pet_wanted`) VALUES
-(2, 7, '', 'p1.png', 'dog'),
-(3, 28, '', 'p2.png', 'dog;cat'),
-(4, 5, '', 'p3.png', 'dog;cat'),
-(5, 15, '', 'p4.png', 'cat'),
-(6, 5, '', 'p5.png', 'cat'),
-(7, 5, '', 'p6.png', 'dog'),
-(8, 5, '', 'p7.png', 'dog'),
-(9, 18, '', 'p8.png', 'dog;cat'),
-(10, 22, '', 'p9.png', 'cat');
+(2, 'Marco', 7, '', 'p1.png', 'dog'),
+(3, 'Maria', 28, '', 'p2.png', 'dog;cat'),
+(4, 'Joan', 5, '', 'p3.png', 'dog;cat'),
+(5, 'Caterina', 15, '', 'p4.png', 'cat'),
+(6, 'Alex', 5, '', 'p5.png', 'cat'),
+(7, 'Thomas', 5, '', 'p6.png', 'dog'),
+(8, 'Max', 5, '', 'p7.png', 'dog'),
+(9, 'Bea', 18, '', 'p8.png', 'dog;cat'),
+(10, 'Marta', 22, '', 'p9.jpg', 'cat');
 
 -- --------------------------------------------------------
 
